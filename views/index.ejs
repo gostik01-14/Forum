@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: rgb(19, 19, 19);
+            color: #EFE7DA;
+        }
+        header{
+            display: flex;
+            gap: 55%;
+            background-color: rgba(0, 0, 0, 0);
+            padding-left: 5%;
+            border-radius: 15px;
+            border: 1px rgb(199, 201, 202) solid;
+        }
+        header div{
+            display: flex;
+            gap: 20%;
+            align-items: center;
+        }
+        header div a{
+            text-decoration: none;
+            color: #EFE7DA;
+            transition: all ease 0.3s;
+        }
+        header div a:hover{
+            background-color: #efe7da57;
+            padding: 5%;
+            border-radius: 5px;
+        }
+        main{
+            padding: 0% 20% 0% 20%;
+        }
+        .card{
+            background-color: #efe7da57;
+            text-align: center;
+            padding: 2%;
+            margin-top: 5%;
+            border-radius: 15px;
+        }
+        .card hr{
+            color: #EFE7DA;
+            border-radius: 1px;
+        }
+        .card button{
+            background-color: #efe7da9d;
+            color:#EFE7DA;
+            padding: 1% 10% 1% 10%;
+            border-radius: 10px;
+            border: 0;
+            transition: all ease 0.3s;
+        }
+        .card button:hover{
+            box-shadow: 1px 1px 1px 1px #b9b3a956;
+            transform: scale(1.1);
+        }
+    </style>
+    <header>
+        <h1>Forum</h1>
+        <div>
+            <p><a href="/">Главная</a></p>
+            <p><a href="/form">Создать&nbsp;вопрос</a></p>
+            <p><a href="/about">О&nbsp;нас</a></p>
+        </div>
+    </header>
+    <main>
+        <div>
+            <% posts.forEach(post => { %>
+                <div class="card">
+                    <h3><%= post.title %></h3>
+                    <hr>
+                    <p><%= post.body %></p>
+                    <i><p>Автор: <%= post.author %></p></i>
+                    <a href="/answers/<%= post.id %>"><button>Обсуждение</button></a>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+</body>
+</html>

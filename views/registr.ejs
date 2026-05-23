@@ -12,11 +12,11 @@
             <div class="header-content">
                 <a href="index.html" class="logo">SoftForum</a>
                 <div class="nav">
-                    <a href="index.html">Главная</a>
-                    <a href="about.html">О нас</a>
-                    <a href="answers.html">Ответы</a>
-                    <a href="sign_in.html">Войти</a>
-                    <a href="registr.html" class="btn btn-primary">Регистрация</a>
+                    <a href="/">Главная</a>
+                    <a href="/about">О нас</a>
+                    <a href="/form">Создать тему</a>
+                    <a href="/sign_in">Войти</a>
+                    <a href="/registr" class="btn btn-primary">Регистрация</a>
                 </div>
             </div>
         </div>
@@ -26,60 +26,21 @@
         <div class="container">
             <div class="auth-container">
                 <h1 class="auth-title">Создать аккаунт</h1>
-                
-                <div class="success-message" id="successMessage">
-                    ✅ Регистрация успешна! Перенаправление...
-                </div>
-                
-                <div class="error-message" id="errorMessage">
-                    ⚠️ Пожалуйста, заполните все поля корректно
-                </div>
 
-                <form id="registerForm" onsubmit="handleRegister(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstname">Имя</label>
-                            <input type="text" id="firstname" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastname">Фамилия</label>
-                            <input type="text" id="lastname" required>
-                        </div>
+                <form id="registerForm" action="/user/add" method="post">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
 
                     <div class="form-group">
                         <label for="username">Имя пользователя</label>
-                        <input type="text" id="username" required placeholder="nickname">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required placeholder="your@email.com">
+                        <input type="text" id="username" required placeholder="@nickname" name="username">
                     </div>
 
                     <div class="form-group">
                         <label for="password">Пароль</label>
-                        <input type="password" id="password" required placeholder="минимум 6 символов" onkeyup="checkPasswordStrength()">
-                        <div class="password-strength" id="passwordStrength"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirmPassword">Подтверждение пароля</label>
-                        <input type="password" id="confirmPassword" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="interests">Интересы (разработка)</label>
-                        <select id="interests">
-                            <option value="">Выберите основное направление</option>
-                            <option>Frontend разработка</option>
-                            <option>Backend разработка</option>
-                            <option>Fullstack разработка</option>
-                            <option>Мобильная разработка</option>
-                            <option>DevOps</option>
-                            <option>Data Science</option>
-                            <option>UI/UX Дизайн</option>
-                        </select>
+                        <input type="password" id="password" required placeholder="минимум 6 символов" name="password">
                     </div>
 
                     <div class="checkbox-group">
@@ -91,7 +52,7 @@
                 </form>
 
                 <div class="auth-footer">
-                    <p>Уже есть аккаунт? <a href="sign_in.html">Войти</a></p>
+                    <p>Уже есть аккаунт? <a href="/sign_in">Войти</a></p>
                 </div>
             </div>
         </div>
@@ -106,7 +67,7 @@
     </footer>
 
     <script>
-        function checkPasswordStrength() {
+        /* function checkPasswordStrength() {
             const password = document.getElementById('password').value;
             const strengthDiv = document.getElementById('passwordStrength');
             
@@ -179,7 +140,7 @@
             setTimeout(() => {
                 errorDiv.style.display = 'none';
             }, 3000);
-        }
+        } */
     </script>
 </body>
 </html>

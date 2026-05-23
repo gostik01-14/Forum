@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SoftForum - Создать тему</title>
-    <link rel="stylesheet" href="css/add_post.css">
+    <link rel="stylesheet" href="css/style_add_post.css">
 </head>
 <body>
     <header class="header">
@@ -12,11 +12,11 @@
             <div class="header-content">
                 <a href="index.html" class="logo">SoftForum</a>
                 <div class="nav">
-                    <a href="index.html">Главная</a>
-                    <a href="about.html">О нас</a>
-                    <a href="answers.html">Ответы</a>
-                    <a href="sign_in.html">Войти</a>
-                    <a href="registr.html" class="btn btn-primary">Регистрация</a>
+                    <a href="/">Главная</a>
+                    <a href="/about">О нас</a>
+                    <a href="/form">Создать тему</a>
+                    <a href="/sign_in">Войти</a>
+                    <a href="/registr" class="btn btn-primary">Регистрация</a>
                 </div>
             </div>
         </div>
@@ -31,33 +31,20 @@
                     💡 Совет: Сформулируйте заголовок максимально конкретно. Хороший заголовок привлекает больше ответов!
                 </div>
 
-                <form action="index.html" method="GET">
+                <form action="/posts/add" method="post">
                     <div class="form-group">
                         <label for="title">Заголовок темы *</label>
                         <input type="text" id="title" name="title" required placeholder="Например: Как настроить Webpack для React проекта?">
                     </div>
 
                     <div class="form-group">
-                        <label for="category">Категория *</label>
-                        <select id="category" name="category" required>
-                            <option value="">Выберите категорию</option>
-                            <option value="frontend">Frontend разработка</option>
-                            <option value="backend">Backend разработка</option>
-                            <option value="mobile">Мобильная разработка</option>
-                            <option value="devops">DevOps и инфраструктура</option>
-                            <option value="design">Дизайн и UI/UX</option>
-                            <option value="general">Общие вопросы</option>
-                        </select>
+                        <label for="body">Содержание *</label>
+                        <textarea id="body" name="body" required placeholder="Опишите вашу проблему или идею подробно...&#10;&#10;Что вы уже попробовали?&#10;Какие технологии используете?&#10;Приложите примеры кода, если необходимо."></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="tags">Теги (через запятую)</label>
-                        <input type="text" id="tags" name="tags" placeholder="JavaScript, React, CSS">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="content">Содержание *</label>
-                        <textarea id="content" name="content" required placeholder="Опишите вашу проблему или идею подробно...&#10;&#10;Что вы уже попробовали?&#10;Какие технологии используете?&#10;Приложите примеры кода, если необходимо."></textarea>
+                        <label for="author">Автор</label>
+                        <input id="author" name="author" required placeholder="Например: Иван Иванов">
                     </div>
 
                     <div class="form-actions">

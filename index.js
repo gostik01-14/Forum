@@ -15,7 +15,7 @@ app.get("/", (req, res) =>{
 })
 
 app.get("/form", (req, res) =>{
-    res.render("add")
+    res.render("add_post")
 })
 
 app.get("/answers/:id", (req, res) => {
@@ -35,6 +35,10 @@ app.get("/registr", (req, res) => {
     res.render("registr")
 })
 
+app.get("/sign_in", (req, res) => {
+    res.render('sign_in')
+})
+
 // Post
 app.post("/answers/:id", (req, res) => {
     db.add_answer(req.params.id, req.body.body)
@@ -52,9 +56,9 @@ app.post("/posts/add", (req, res) =>{
     }
 })
 
-app.post("/add_user", (req, res) => {
+app.post("/user/add", (req, res) => {
     const user = user_db.add_user(req.body.name, req.body.username, req.body.password)
-    if (user) {
+    if (user == true) {
         res.redirect('/')
     } else {
         res.render('error')

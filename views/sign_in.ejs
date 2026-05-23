@@ -12,11 +12,11 @@
             <div class="header-content">
                 <a href="index.html" class="logo">SoftForum</a>
                 <div class="nav">
-                    <a href="index.html">Главная</a>
-                    <a href="about.html">О нас</a>
-                    <a href="answers.html">Ответы</a>
-                    <a href="sign_in.html">Войти</a>
-                    <a href="registr.html" class="btn btn-primary">Регистрация</a>
+                    <a href="/">Главная</a>
+                    <a href="/about">О нас</a>
+                    <a href="/form">Создать тему</a>
+                    <a href="/sign_in">Войти</a>
+                    <a href="/registr" class="btn btn-primary">Регистрация</a>
                 </div>
             </div>
         </div>
@@ -26,25 +26,16 @@
         <div class="container">
             <div class="auth-container">
                 <h1 class="auth-title">Вход в аккаунт</h1>
-                
-                <div class="error-message" id="errorMessage" style="display: none;">
-                    ⚠️ Неверный email или пароль
-                </div>
 
-                <form id="loginForm" onsubmit="handleLogin(event)">
+                <form action="/user/sign_in" method="post">
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required placeholder="your@email.com">
+                        <label for="username">Имя пользователя</label>
+                        <input type="text" id="username" required placeholder="@nickname" name="username">
                     </div>
 
                     <div class="form-group">
                         <label for="password">Пароль</label>
-                        <input type="password" id="password" required placeholder="••••••••">
-                    </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="remember">
-                        <label for="remember" style="margin: 0;">Запомнить меня</label>
+                        <input type="password" id="password" required placeholder="••••••••" name="password">
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Войти</button>
@@ -52,7 +43,6 @@
 
                 <div class="auth-footer">
                     <p>Нет аккаунта? <a href="registr.html">Зарегистрироваться</a></p>
-                    <p style="margin-top: 10px;"><a href="#">Забыли пароль?</a></p>
                 </div>
             </div>
         </div>
@@ -67,6 +57,7 @@
     </footer>
 
     <script>
+        /*
         function handleLogin(event) {
             event.preventDefault();
             const email = document.getElementById('email').value;
@@ -81,7 +72,7 @@
                     document.getElementById('errorMessage').style.display = 'none';
                 }, 3000);
             }
-        }
+        } */
     </script>
 </body>
 </html>

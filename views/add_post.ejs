@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoftForum - Главная</title>
+    <title>SoftForum - Создать тему</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,6 @@
             line-height: 1.6;
         }
 
-        /* Шапка */
         .header {
             background: #1A1D21;
             border-bottom: 1px solid #2A2F35;
@@ -90,17 +89,16 @@
             transform: translateY(-1px);
         }
 
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #6C9BD2;
-            color: #6C9BD2;
+        .btn-secondary {
+            background: #25292E;
+            color: #EAECEF;
+            border: 1px solid #2A2F35;
         }
 
-        .btn-outline:hover {
-            background: rgba(108, 155, 210, 0.1);
+        .btn-secondary:hover {
+            background: #2A2F35;
         }
 
-        /* Основной контент */
         .main {
             padding: 40px 0;
         }
@@ -111,106 +109,68 @@
             color: #EAECEF;
         }
 
-        /* Секция быстрого действия */
-        .quick-actions {
+        .form-container {
             background: #1A1D21;
             border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 40px;
+            padding: 40px;
             border: 1px solid #2A2F35;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        /* Карточки тем */
-        .topics-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+        .form-group {
+            margin-bottom: 24px;
         }
 
-        .topic-card {
-            background: #1A1D21;
-            border: 1px solid #2A2F35;
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s;
-        }
-
-        .topic-card:hover {
-            border-color: #6C9BD2;
-            transform: translateX(4px);
-        }
-
-        .topic-title {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .topic-title a {
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
             color: #EAECEF;
-            text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 500;
         }
 
-        .topic-title a:hover {
-            color: #6C9BD2;
-        }
-
-        .topic-meta {
-            display: flex;
-            gap: 20px;
-            color: #8B949E;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .topic-excerpt {
-            color: #8B949E;
-            margin-bottom: 12px;
-        }
-
-        .topic-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
             background: #25292E;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #8B949E;
-        }
-
-        /* Пагинация */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 40px;
-        }
-
-        .page-link {
-            padding: 8px 12px;
-            background: #1A1D21;
             border: 1px solid #2A2F35;
             border-radius: 6px;
             color: #EAECEF;
-            text-decoration: none;
+            font-size: 16px;
             transition: all 0.3s;
         }
 
-        .page-link:hover,
-        .page-link.active {
-            background: #6C9BD2;
-            color: #121417;
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
             border-color: #6C9BD2;
+            box-shadow: 0 0 0 3px rgba(108, 155, 210, 0.1);
         }
 
-        /* Футер */
+        .form-group textarea {
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            margin-top: 32px;
+        }
+
+        .alert {
+            background: #1E2836;
+            border-left: 4px solid #6C9BD2;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            color: #8B949E;
+        }
+
         .footer {
             background: #1A1D21;
             border-top: 1px solid #2A2F35;
@@ -229,14 +189,12 @@
                 gap: 16px;
             }
             
-            .quick-actions {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
+            .form-container {
+                padding: 20px;
             }
             
-            .topic-meta {
-                flex-wrap: wrap;
+            .form-actions {
+                flex-direction: column;
             }
         }
     </style>
@@ -259,35 +217,47 @@
 
     <main class="main">
         <div class="container">
-            <div class="quick-actions">
-                <div>
-                    <h2>Добро пожаловать в SoftForum</h2>
-                    <p style="color: #8B949E;">Сообщество дружных энтузиастов</p>
-                </div>
-                <a href="add_post.html" class="btn btn-primary">➕ Создать тему</a>
-            </div>
-
-            <h1 class="page-title">Актуальные темы</h1>
+            <h1 class="page-title">Создать новую тему</h1>
             
-            <div class="topics-grid">
-                <% posts.forEach(post => { %>
-                    <div class="topic-card">
-                        <div class="topic-title">
-                            <a href="/answers/<%= post.id %>"><%= post.title %></a>
-                        </div>
-                        <div class="topic-meta">
-                            <span>👤 <%= post.author %></span>
-                        </div>
-                        <div class="topic-excerpt">
-                            <%= post.body %>
-                        </div>
-                        <div class="topic-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Optimization</span>
-                        </div>
+            <div class="form-container">
+                <div class="alert">
+                    💡 Совет: Сформулируйте заголовок максимально конкретно. Хороший заголовок привлекает больше ответов!
+                </div>
+
+                <form action="index.html" method="GET">
+                    <div class="form-group">
+                        <label for="title">Заголовок темы *</label>
+                        <input type="text" id="title" name="title" required placeholder="Например: Как настроить Webpack для React проекта?">
                     </div>
-                <% }) %>
+
+                    <div class="form-group">
+                        <label for="category">Категория *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Выберите категорию</option>
+                            <option value="frontend">Frontend разработка</option>
+                            <option value="backend">Backend разработка</option>
+                            <option value="mobile">Мобильная разработка</option>
+                            <option value="devops">DevOps и инфраструктура</option>
+                            <option value="design">Дизайн и UI/UX</option>
+                            <option value="general">Общие вопросы</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tags">Теги (через запятую)</label>
+                        <input type="text" id="tags" name="tags" placeholder="JavaScript, React, CSS">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Содержание *</label>
+                        <textarea id="content" name="content" required placeholder="Опишите вашу проблему или идею подробно...&#10;&#10;Что вы уже попробовали?&#10;Какие технологии используете?&#10;Приложите примеры кода, если необходимо."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Опубликовать тему</button>
+                    </div>
+                </form>
             </div>
         </div>
     </main>

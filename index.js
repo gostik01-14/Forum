@@ -1,12 +1,20 @@
 const express = require('express')
 const db = require('./db.js')
 const user_db = require("./user_auth.js")
+require('dotenv').config()
+const session = require('express-session')
 
 const app = express()
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static('public'))
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } 
+}))
 
 // Get
 app.get("/", (req, res) =>{
@@ -39,6 +47,17 @@ app.get("/sign_in", (req, res) => {
     res.render('sign_in')
 })
 
+app.get("/user/:id", (req, res) => {
+    const check = user_db.check_id(req.params.id);
+    if (!check) {
+        res.redirect("/");
+    } else {
+        req.session.userID = check.id
+        res.redirect('/')
+    }
+})
+
+
 // Post
 app.post("/answers/:id", (req, res) => {
     db.add_answer(req.params.id, req.body.body)
@@ -62,6 +81,15 @@ app.post("/user/add", (req, res) => {
         res.redirect('/')
     } else {
         res.render('error')
+    }
+})
+
+app.post("/user/sign_in", (req, res) => {
+    const result = user_db.sign_in(req.body.name, req.body.username, req.body.password)
+    if (result == false) {
+        res.render('error')
+    } else {
+        res.redirect(`/user/${ result.id }`)
     }
 })
 

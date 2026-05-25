@@ -1,2 +1,13 @@
-/node_modules/
+# Окружение
+.env
+.env.local
+.env.*local
+
+# Базы данных
 *.db
+*.sqlite
+*.sqlite3
+
+# Node js
+node_modules/
+package-log.json

@@ -15,10 +15,6 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false } 
 }))
-app.use((req, res, next) => {
-    console.log('Session userID:', req.session.userID);
-    next();
-});
 
 // Get
 app.get("/", (req, res) =>{
@@ -55,8 +51,14 @@ app.get("/sign_in", (req, res) => {
 
 // Post
 app.post("/answers/:id", (req, res) => {
-    db.add_answer(req.params.id, req.body.body)
-    res.redirect(`/answers/${req.params.id}`)
+    const authorID = req.session.userID
+    if (authorID == undefined) {
+        res.redirect('/sign_in')
+    } else {
+        const authorName = user_db.get_data_withID(authorID).username
+        db.add_answer(req.params.id, req.body.body, authorName)
+        res.redirect(`/answers/${req.params.id}`)
+    }
 })
 
 app.post("/posts/add", (req, res) =>{
@@ -91,7 +93,7 @@ app.post("/user/sign_in", (req, res) => {
         res.render('error', { "err": result })
     } else {
         req.session.userID = result.id
-        res.send(`${ req.session.userID }`)
+        res.redirect('/')
     }
 })
 

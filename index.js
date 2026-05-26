@@ -35,7 +35,8 @@ app.get("/answers/:id", (req, res) => {
     if (typeof answers == 'string') {
         res.render("error", { "err": answers })
     } else {
-        res.render("answers", { answers: answers, id: req.params.id })
+        const data = db.get_all_withID(req.params.id)
+        res.render("answers", { answers: answers, id: req.params.id, info: data })
     }
 })
 

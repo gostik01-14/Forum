@@ -21,34 +21,276 @@
             </div>
         </div>
     </header>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: #121417;
+            color: #EAECEF;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #1A1D21;
+            border-bottom: 1px solid #2A2F35;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6C9BD2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .logo:hover {
+            color: #7EABDA;
+        }
+
+        .nav {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #EAECEF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #6C9BD2;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #6C9BD2;
+            color: #121417;
+        }
+
+        .btn-primary:hover {
+            background: #7EABDA;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #25292E;
+            color: #EAECEF;
+            border: 1px solid #2A2F35;
+        }
+
+        .btn-secondary:hover {
+            background: #2A2F35;
+        }
+
+        .main {
+            padding: 40px 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #6C9BD2;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .topic-header {
+            background: #1A1D21;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #2A2F35;
+        }
+
+        .topic-title {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .topic-meta {
+            display: flex;
+            gap: 20px;
+            color: #8B949E;
+            font-size: 14px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .topic-content {
+            color: #EAECEF;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .post {
+            background: #1A1D21;
+            border: 1px solid #2A2F35;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .post:hover {
+            border-color: #6C9BD2;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .post-author {
+            font-weight: bold;
+            color: #6C9BD2;
+        }
+
+        .post-date {
+            color: #5C6670;
+            font-size: 12px;
+        }
+
+        .post-content {
+            color: #8B949E;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .post-action {
+            color: #5C6670;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .post-action:hover {
+            color: #6C9BD2;
+        }
+
+        .answer-form {
+            background: #1A1D21;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+            border: 1px solid #2A2F35;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #25292E;
+            border: 1px solid #2A2F35;
+            border-radius: 6px;
+            color: #EAECEF;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6C9BD2;
+        }
+
+        .footer {
+            background: #1A1D21;
+            border-top: 1px solid #2A2F35;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            text-align: center;
+            color: #5C6670;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 
     <main class="main">
         <div class="container">
-            <a href="index.html" class="back-link">← Назад к списку тем</a>
+            <a href="/" class="back-link">← Назад к списку тем</a>
             
             <div class="topic-header">
-                <h1 class="topic-title">Как оптимизировать производительность React приложения?</h1>
+                <h1 class="topic-title"><%= info.title %></h1>
                 <div class="topic-meta">
-                    <span>👤 Автор: AlexDev</span>
-                    <span>📅 Создано: 2 часа назад</span>
+                    <span>👤 Автор: <%= info.author %></span>
+                    <!-- <span>📅 Создано: 2 часа назад</span>
                     <span>💬 15 ответов</span>
-                    <span>👁️ 234 просмотра</span>
+                    <span>👁️ 234 просмотра</span> -->
                 </div>
                 <div class="topic-content">
-                    <p>Столкнулся с проблемой медленной загрузки компонентов. Использую React 18, много динамических импортов. Приложение имеет около 50 компонентов, и начальная загрузка занимает ~3 секунды.</p>
-                    <br>
-                    <p>Что я уже попробовал:</p>
-                    <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li>React.lazy() для разделения кода</li>
-                        <li>мемоизацию компонентов с помощью memo()</li>
-                        <li>useCallback и useMemo для функций</li>
-                    </ul>
-                    <br>
-                    <p>Но результат незначительный. Может быть, есть более эффективные методы? Заранее спасибо за советы!</p>
+                    <%= info.body %>
                 </div>
             </div>
 
-            <div class="post">
+            <!-- <div class="post">
                 <div class="post-header">
                     <div class="post-author">👤 WebExpert</div>
                     <div class="post-date">📅 1 час назад</div>
@@ -61,70 +303,19 @@
                     <span class="post-action">💬 Ответить</span>
                     <span class="post-action">📌 Цитировать</span>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="post">
-                <div class="post-header">
-                    <div class="post-author">👤 OptimizerPro</div>
-                    <div class="post-date">📅 45 минут назад</div>
+            <% answers.forEach(answer => { %>
+                <div class="post">
+                    <div class="post-content"><%= answer %></div>
                 </div>
-                <div class="post-content">
-                    Рекомендую настроить Webpack: 
-                    1. Включи production mode
-                    2. Настрой code splitting
-                    3. Используй bundle analyzer, чтобы увидеть, что занимает место
-                    4. Вынеси зависимости в vendor chunk
-                    
-                    Также полезно использовать React DevTools Profiler для поиска узких мест.
-                </div>
-                <div class="post-actions">
-                    <span class="post-action">👍 8</span>
-                    <span class="post-action">💬 Ответить</span>
-                    <span class="post-action">📌 Цитировать</span>
-                </div>
-            </div>
-
-            <div class="post">
-                <div class="post-header">
-                    <div class="post-author">👤 JuniorDev</div>
-                    <div class="post-date">📅 30 минут назад</div>
-                </div>
-                <div class="post-content">
-                    А может проблема не в React, а в бекенде? Проверь размер ответов от API. Иногда проблемы с производительностью начинаются оттуда. Используй сжатие gzip/brotli на сервере.
-                </div>
-                <div class="post-actions">
-                    <span class="post-action">👍 5</span>
-                    <span class="post-action">💬 Ответить</span>
-                    <span class="post-action">📌 Цитировать</span>
-                </div>
-            </div>
-
-            <div class="post">
-                <div class="post-header">
-                    <div class="post-author">👤 SeniorCoder</div>
-                    <div class="post-date">📅 15 минут назад</div>
-                </div>
-                <div class="post-content">
-                    Обрати внимание на:
-                    1. Использование ключей в списках (уникальные и стабильные)
-                    2. Избегай создания новых объектов/массивов при каждом рендере
-                    3. Внедри серверный рендеринг (Next.js) если это критично
-                    4. Оптимизируй изображения - используй lazy loading и современные форматы (WebP)
-                    
-                    P.S. 3 секунды для 50 компонентов - не так уж плохо, но всегда есть куда расти :)
-                </div>
-                <div class="post-actions">
-                    <span class="post-action">👍 3</span>
-                    <span class="post-action">💬 Ответить</span>
-                    <span class="post-action">📌 Цитировать</span>
-                </div>
-            </div>
+            <% }) %>
 
             <div class="answer-form">
                 <h3 style="margin-bottom: 16px;">Ваш ответ</h3>
-                <form action="answers.html" method="GET">
+                <form action="/answers/<%= id %>" method="post">
                     <div class="form-group">
-                        <textarea placeholder="Напишите ваш ответ... Будьте конкретны и вежливы"></textarea>
+                        <textarea placeholder="Напишите ваш ответ... Будьте конкретны и вежливы" name="body"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Отправить ответ</button>
                 </form>

@@ -29,6 +29,11 @@ function get_answers(id) {
     }
 }
 
+function get_all_withID(id) {
+    const get = db.prepare('SELECT * FROM posts WHERE id = ?').get(id)
+    return get
+}
+
 function add_answer(id, comment) {
     const insert = db.prepare(`
         UPDATE posts 
@@ -47,5 +52,6 @@ module.exports = {
     get_all_db,
     add_post,
     get_answers,
-    add_answer
+    add_answer,
+    get_all_withID
 }

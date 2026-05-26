@@ -33,7 +33,7 @@ app.get("/form", (req, res) =>{
 app.get("/answers/:id", (req, res) => {
     var answers = db.get_answers(req.params.id)
     if (typeof answers == 'string') {
-        res.render("error")
+        res.render("error", { "err": answers })
     } else {
         res.render("answers", { answers: answers, id: req.params.id })
     }
@@ -59,15 +59,19 @@ app.post("/answers/:id", (req, res) => {
 })
 
 app.post("/posts/add", (req, res) =>{
-    if (req.body.title == "" || req.body.body == "" || req.body.author == ""){
-        res.render("error")
-    } else if (req.body.title == " " || req.body.body == " " || req.body.author == " "){
-        res.render("error")
+    if (req.body.title == "" || req.body.body == ""){
+        res.render("error", { "err": "Неправильно заполнены поля"})
+    } else if (req.body.title == " " || req.body.body == " "){
+        res.render("error", { "err": "Неправильно заполнены поля"})
     } else{
         const authorID = req.session.userID
-        const authorName = user_db.get_data_withID(authorID).username
-        db.add_post(req.body.title, req.body.body, authorName)
-        res.redirect('/')
+        if (authorID == undefined) {
+            res.redirect('/sign_in')
+        } else {
+            const authorName = user_db.get_data_withID(authorID).username
+            db.add_post(req.body.title, req.body.body, authorName)
+            res.redirect('/')
+        }
     }
 })
 
@@ -76,14 +80,14 @@ app.post("/user/add", (req, res) => {
     if (user == true) {
         res.redirect('/')
     } else {
-        res.render('error')
+        res.render('error', { "err": user })
     }
 })
 
 app.post("/user/sign_in", (req, res) => {
     const result = user_db.sign_in(req.body.username, req.body.password)
     if (result == "Данного пользователя несуществует" || result == 'Неправильно введён пароль') {
-        res.render('error')
+        res.render('error', { "err": result })
     } else {
         req.session.userID = result.id
         res.send(`${ req.session.userID }`)

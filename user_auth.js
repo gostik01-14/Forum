@@ -31,13 +31,13 @@ function add_user(name, username, password) {
 }
 
 // Войти
-function sign_in(name, username, password){
+function sign_in(username, password){
     const if_this_user_exist = db.prepare('SELECT username FROM users WHERE username = ?').get(username)
     if (if_this_user_exist == undefined) {
         return 'Данного пользователя несуществует'
     } else {
         const correct_password = db.prepare('SELECT password FROM users WHERE username = ?').get(username)
-        if (password != correct_password) {
+        if (password != correct_password.password) {
             return 'Неправильно введён пароль'
         } else {
             const data = db.prepare('SELECT * FROM users WHERE username = ?').get(username)
@@ -47,19 +47,14 @@ function sign_in(name, username, password){
 }
 
 // Проверка наличия id
-function check_id(id){
-    const this_id_exist = db.prepare('SELECT id FROM users WHERE id = ?').get(id)
-    if (this_id_exist == undefined) {
-        return false
-    } else {
-        const data = db.prepare('SELECT * FROM users WHERE id = ?').get(id)
-        return data
-    }
+function get_data_withID(id){
+    const data = db.prepare('SELECT * FROM users WHERE id = ?').get(id)
+    return data
 }
 
 module.exports = {
     db,
     add_user,
     sign_in,
-    check_id
+    get_data_withID
 }

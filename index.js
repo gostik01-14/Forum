@@ -15,6 +15,10 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false } 
 }))
+app.use((req, res, next) => {
+    console.log('Session userID:', req.session.userID);
+    next();
+});
 
 // Get
 app.get("/", (req, res) =>{
@@ -47,16 +51,6 @@ app.get("/sign_in", (req, res) => {
     res.render('sign_in')
 })
 
-app.get("/user/:id", (req, res) => {
-    const check = user_db.check_id(req.params.id);
-    if (!check) {
-        res.redirect("/");
-    } else {
-        req.session.userID = check.id
-        res.redirect('/')
-    }
-})
-
 
 // Post
 app.post("/answers/:id", (req, res) => {
@@ -70,7 +64,9 @@ app.post("/posts/add", (req, res) =>{
     } else if (req.body.title == " " || req.body.body == " " || req.body.author == " "){
         res.render("error")
     } else{
-        db.add_post(req.body.title, req.body.body, req.body.author)
+        const authorID = req.session.userID
+        const authorName = user_db.get_data_withID(authorID).username
+        db.add_post(req.body.title, req.body.body, authorName)
         res.redirect('/')
     }
 })
@@ -85,11 +81,12 @@ app.post("/user/add", (req, res) => {
 })
 
 app.post("/user/sign_in", (req, res) => {
-    const result = user_db.sign_in(req.body.name, req.body.username, req.body.password)
-    if (result == false) {
+    const result = user_db.sign_in(req.body.username, req.body.password)
+    if (result == "Данного пользователя несуществует" || result == 'Неправильно введён пароль') {
         res.render('error')
     } else {
-        res.redirect(`/user/${ result.id }`)
+        req.session.userID = result.id
+        res.send(`${ req.session.userID }`)
     }
 })
 

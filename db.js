@@ -7,16 +7,17 @@ db.exec(`
         title TEXT NOT NULL,
         body TEXT NOT NULL,
         author TEXT NOT NULL,
+        tags TEXT,
         answers TEXT
     )
 `);
 
-function add_post(title, body, author) {
+function add_post(title, body, author, tags) {
     var answers = '[]'
     const insert = db.prepare(`
-        INSERT INTO posts (title, body, author, answers) VALUES (?, ?, ?, ?)
+        INSERT INTO posts (title, body, author, answers, tags) VALUES (?, ?, ?, ?, ?)
     `)
-    const info = insert.run(title, body, author, answers)
+    const info = insert.run(title, body, author, answers, tags)
 }
 
 function get_answers(id) {
@@ -52,6 +53,13 @@ function add_answer(id, comment, author) {
 
 function get_all_db() {
     const allPosts = db.prepare('SELECT * FROM posts').all();
+    for (var i = 0; i <= allPosts.length - 1; i++) {
+        if (allPosts[i].tags == null) {
+            continue
+        } else {
+            allPosts[i].tags = allPosts[i].tags.split(",")
+        }
+    }
     return allPosts;
 }
 

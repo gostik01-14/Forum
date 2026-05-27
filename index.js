@@ -72,7 +72,7 @@ app.post("/posts/add", (req, res) =>{
             res.redirect('/sign_in')
         } else {
             const authorName = user_db.get_data_withID(authorID).username
-            db.add_post(req.body.title, req.body.body, authorName)
+            db.add_post(req.body.title, req.body.body, authorName, req.body.tags)
             res.redirect('/')
         }
     }

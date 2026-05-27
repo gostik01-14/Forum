@@ -47,9 +47,13 @@
                             <%= post.body %>
                         </div>
                         <div class="topic-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Optimization</span>
+                            <% if (post.tags == null) { %>
+
+                            <% } else { %>
+                                <% post.tags.forEach(tag => { %>
+                                    <span class="tag"><%= tag %></span>
+                                <% }) %>
+                            <% } %>
                         </div>
                     </div>
                 <% }) %>

@@ -48,6 +48,17 @@ app.get("/sign_in", (req, res) => {
     res.render('sign_in')
 })
 
+app.get("/posts/delete/:id", (req, res) => {
+    var info_post = db.get_all_withID(req.params.id)
+    var current_user = user_db.get_author_byID(req.session.userID)
+        if (info_post.author == current_user.username) {
+            db.delete_post(req.params.id)
+            res.redirect("/")
+        } else {
+            res.render("error", { err: 'Недостаточно прав' })
+        }
+})
+
 
 // Post
 app.post("/answers/:id", (req, res) => {

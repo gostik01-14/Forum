@@ -216,6 +216,47 @@
             color: #5C6670;
         }
 
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #B5756B 0%, #9E5E54 100%);
+    color: #EAECEF;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-delete::before {
+    content: '🗑️';
+    margin-right: 6px;
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.btn-delete:hover {
+    background: linear-gradient(135deg, #C98B80 0%, #B5756B 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(181, 117, 107, 0.4);
+}
+
+.btn-delete:hover::before {
+    transform: scale(1.1);
+}
+
+.btn-delete:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(181, 117, 107, 0.3);
+}
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;

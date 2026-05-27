@@ -20,6 +20,10 @@ function add_post(title, body, author, tags) {
     const info = insert.run(title, body, author, answers, tags)
 }
 
+function delete_post(id) {
+    const get = db.prepare('DELETE FROM posts WHERE id = ?').run(id)
+}
+
 function get_answers(id) {
     const get = db.prepare('SELECT answers FROM posts WHERE id = ?').get(id)
     if (get == undefined){
@@ -69,5 +73,6 @@ module.exports = {
     add_post,
     get_answers,
     add_answer,
-    get_all_withID
+    get_all_withID,
+    delete_post
 }

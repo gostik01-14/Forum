@@ -52,9 +52,20 @@ function get_data_withID(id){
     return data
 }
 
+// Найти автора по айди
+function get_author_byID(id) {
+    if (id == undefined) {
+        return 'Некоректный id'
+    } else {
+        const get = db.prepare('SELECT * FROM users WHERE id = ?').get(id)
+        return get
+    }
+}
+
 module.exports = {
     db,
     add_user,
     sign_in,
-    get_data_withID
+    get_data_withID,
+    get_author_byID
 }

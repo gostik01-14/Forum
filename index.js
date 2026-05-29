@@ -59,6 +59,11 @@ app.get("/posts/delete/:id", (req, res) => {
         }
 })
 
+app.get("/logout", (req, res) => {
+    req.session.destroy()
+    res.redirect("/")
+})
+
 
 // Post
 app.post("/answers/:id", (req, res) => {
@@ -100,6 +105,7 @@ app.post("/user/add", (req, res) => {
 
 app.post("/user/sign_in", (req, res) => {
     const result = user_db.sign_in(req.body.username, req.body.password)
+    console.log(result)
     if (result == "Данного пользователя несуществует" || result == 'Неправильно введён пароль') {
         res.render('error', { "err": result })
     } else {

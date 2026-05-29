@@ -5,6 +5,10 @@
   <li>EJS</li>
   <li>body-parser</li>
   <li>better-sqlite3</li>
+  <li>bcrypt</li>
+  <li>uuid</li>
+  <li>express-session</li>
+  <li>dotenv</li>
 </ul></p>
 <img src='https://lite.host/assets/images/news/nodejs.png' width='40%'>
 <h2>Для запуска на своём ПК:</h2>

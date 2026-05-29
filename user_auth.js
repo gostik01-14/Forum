@@ -1,6 +1,10 @@
 const Database = require('better-sqlite3');
 const db = new Database('posts.db');
 const { v4: uuidv4 } = require('uuid');
+const bcrypt = require('bcrypt')
+
+
+const salt_rounds = 10
 
 db.exec(`
     CREATE TABLE IF NOT EXISTS users (
@@ -20,7 +24,9 @@ function add_user(name, username, password) {
         `)
         if (username.startsWith('@') && username.length < 40) {
             var user_id = String(uuidv4())
-            const info = insert.run(user_id, name, username, password)
+            bcrypt.hash(password, salt_rounds, (err, this_hash) => {
+                const info = insert.run(user_id, name, username, this_hash)
+            })
             return true
         } else {
             return 'Поля заполнены неправильно'
@@ -36,12 +42,12 @@ function sign_in(username, password){
     if (if_this_user_exist == undefined) {
         return 'Данного пользователя несуществует'
     } else {
-        const correct_password = db.prepare('SELECT password FROM users WHERE username = ?').get(username)
-        if (password != correct_password.password) {
-            return 'Неправильно введён пароль'
+        const userData = db.prepare('SELECT * FROM users WHERE username = ?').get(username)
+        const result = bcrypt.compareSync(password, userData.password)
+        if (result) {
+            return userData
         } else {
-            const data = db.prepare('SELECT * FROM users WHERE username = ?').get(username)
-            return data
+            return 'Неправильно введён пароль'
         }
     }
 }

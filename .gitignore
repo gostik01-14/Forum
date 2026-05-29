@@ -11,3 +11,8 @@
 # Node js
 node_modules/
 package-log.json
+
+.txt
+*.txt
+
+HTML Version/

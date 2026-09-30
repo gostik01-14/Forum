@@ -8,16 +8,18 @@ db.exec(`
         body TEXT NOT NULL,
         author TEXT NOT NULL,
         tags TEXT,
-        answers TEXT
+        answers TEXT,
+        likes TEXT
     )
 `);
 
 function add_post(title, body, author, tags) {
     var answers = '[]'
+    var likes = '[]'
     const insert = db.prepare(`
-        INSERT INTO posts (title, body, author, answers, tags) VALUES (?, ?, ?, ?, ?)
+        INSERT INTO posts (title, body, author, answers, tags, likes) VALUES (?, ?, ?, ?, ?, ?)
     `)
-    const info = insert.run(title, body, author, answers, tags)
+    const info = insert.run(title, body, author, answers, tags, likes)
 }
 
 function delete_post(id) {
@@ -67,6 +69,56 @@ function get_all_db() {
     return allPosts;
 }
 
+function add_like(id, author) {
+    var obj_like = {
+        author: author,
+    }
+    const get = db.prepare('SELECT * FROM posts WHERE id = ?').get(id)
+    var arr_likes = JSON.parse(get.answers)
+    arr_likes.push(obj_like)
+    const ready_likes = JSON.stringify(arr_likes)
+    const insert = db.prepare(`
+        UPDATE posts 
+        SET likes = ?
+        WHERE id = ?
+    `).run(ready_likes, id);
+}
+
+function delete_like(id, author) {
+    var obj_like = {
+        author: author,
+    }
+    const get = db.prepare('SELECT * FROM posts WHERE id = ?').get(id)
+    var arr_likes = JSON.parse(get.answers)
+    const index = arr_likes.indexOf(obj_like);
+    if (index != -1) {
+        arr_likes.splice(index, 1);
+    } else {
+        return "Пользователь не ставил like"
+    }
+    const ready_likes = JSON.stringify(arr_likes)
+    const insert = db.prepare(`
+        UPDATE posts 
+        SET likes = ?
+        WHERE id = ?
+    `).run(ready_likes, id);
+}
+
+function is_user_liked(id, author) {
+    var obj_like = {
+        author: author,
+    }
+    const get = db.prepare('SELECT * FROM posts WHERE id = ?').get(id)
+    var arr_likes = JSON.parse(get.answers)
+    const index = arr_likes.indexOf(obj_like);
+    if (index != -1) {
+        return true
+    } else {
+        return false
+    }
+}
+
+
 module.exports = {
     db,
     get_all_db,
@@ -74,5 +126,8 @@ module.exports = {
     get_answers,
     add_answer,
     get_all_withID,
-    delete_post
+    delete_post,
+    add_like,
+    delete_like,
+    is_user_liked
 }

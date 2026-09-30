@@ -1,222 +1,119 @@
-* {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* ---------- Секция быстрого действия ---------- */
+.quick-actions {
+    background: linear-gradient(135deg, #1A1D21 0%, #1E2836 100%);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 40px;
+    border: 1px solid #2A2F35;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-            background: #121417;
-            color: #EAECEF;
-            line-height: 1.6;
-        }
+/* ---------- Карточки тем ---------- */
+.topics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
-        /* Шапка */
-        .header {
-            background: #1A1D21;
-            border-bottom: 1px solid #2A2F35;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+.topic-card {
+    background: #1A1D21;
+    border: 1px solid #2A2F35;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.4s ease-out backwards;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+.topic-card:hover {
+    border-color: #6C9BD2;
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(108, 155, 210, 0.15);
+}
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-        }
+.topic-card:nth-child(1) { animation-delay: 0.05s; }
+.topic-card:nth-child(2) { animation-delay: 0.10s; }
+.topic-card:nth-child(3) { animation-delay: 0.15s; }
+.topic-card:nth-child(4) { animation-delay: 0.20s; }
+.topic-card:nth-child(5) { animation-delay: 0.25s; }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #6C9BD2;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+.topic-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
 
-        .logo:hover {
-            color: #7EABDA;
-        }
+.topic-title a {
+    color: #EAECEF;
+    text-decoration: none;
+    transition: color 0.3s;
+}
 
-        .nav {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-        }
+.topic-title a:hover {
+    color: #6C9BD2;
+}
 
-        .nav a {
-            color: #EAECEF;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+.topic-meta {
+    display: flex;
+    gap: 20px;
+    color: #8B949E;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
 
-        .nav a:hover {
-            color: #6C9BD2;
-        }
+.topic-excerpt {
+    color: #8B949E;
+    margin-bottom: 12px;
+}
 
-        .btn {
-            padding: 8px 16px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
+.topic-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
 
-        .btn-primary {
-            background: #6C9BD2;
-            color: #121417;
-        }
+.tag {
+    background: #25292E;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #8B949E;
+    transition: all 0.2s;
+}
 
-        .btn-primary:hover {
-            background: #7EABDA;
-            transform: translateY(-1px);
-        }
+.tag:hover {
+    background: #6C9BD2;
+    color: #121417;
+    transform: translateY(-2px);
+}
 
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #6C9BD2;
-            color: #6C9BD2;
-        }
+/* ---------- Пагинация ---------- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+}
 
-        .btn-outline:hover {
-            background: rgba(108, 155, 210, 0.1);
-        }
+.page-link {
+    padding: 8px 12px;
+    background: #1A1D21;
+    border: 1px solid #2A2F35;
+    border-radius: 6px;
+    color: #EAECEF;
+    text-decoration: none;
+    transition: all 0.3s;
+}
 
-        /* Основной контент */
-        .main {
-            padding: 40px 0;
-        }
+.page-link:hover,
+.page-link.active {
+    background: #6C9BD2;
+    color: #121417;
+    border-color: #6C9BD2;
+}
 
-        .page-title {
-            font-size: 32px;
-            margin-bottom: 30px;
-            color: #EAECEF;
-        }
-
-        /* Секция быстрого действия */
-        .quick-actions {
-            background: #1A1D21;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 40px;
-            border: 1px solid #2A2F35;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Карточки тем */
-        .topics-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .topic-card {
-            background: #1A1D21;
-            border: 1px solid #2A2F35;
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s;
-        }
-
-        .topic-card:hover {
-            border-color: #6C9BD2;
-            transform: translateX(4px);
-        }
-
-        .topic-title {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .topic-title a {
-            color: #EAECEF;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .topic-title a:hover {
-            color: #6C9BD2;
-        }
-
-        .topic-meta {
-            display: flex;
-            gap: 20px;
-            color: #8B949E;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .topic-excerpt {
-            color: #8B949E;
-            margin-bottom: 12px;
-        }
-
-        .topic-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            background: #25292E;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #8B949E;
-        }
-
-        /* Пагинация */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 40px;
-        }
-
-        .page-link {
-            padding: 8px 12px;
-            background: #1A1D21;
-            border: 1px solid #2A2F35;
-            border-radius: 6px;
-            color: #EAECEF;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .page-link:hover,
-        .page-link.active {
-            background: #6C9BD2;
-            color: #121417;
-            border-color: #6C9BD2;
-        }
-
-        /* Футер */
-        .footer {
-            background: #1A1D21;
-            border-top: 1px solid #2A2F35;
-            padding: 30px 0;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            text-align: center;
-            color: #5C6670;
-        }
-
-        .btn-logout {
+/* ---------- Кнопка выхода ---------- */
+.btn-logout {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -264,6 +161,7 @@
     transform: translateY(1px);
 }
 
+/* ---------- Кнопка удаления ---------- */
 .btn-delete {
     display: inline-flex;
     align-items: center;
@@ -305,19 +203,27 @@
     box-shadow: 0 2px 8px rgba(181, 117, 107, 0.3);
 }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 16px;
-            }
-            
-            .quick-actions {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
-            }
-            
-            .topic-meta {
-                flex-wrap: wrap;
-            }
-        }
+/* ---------- Анимация появления карточек ---------- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Адаптивность ---------- */
+@media (max-width: 768px) {
+    .quick-actions {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .topic-meta {
+        flex-wrap: wrap;
+    }
+}

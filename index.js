@@ -114,6 +114,21 @@ app.post("/user/sign_in", (req, res) => {
     }
 })
 
+app.post("/posts/like/:id", (req, res) => {
+    if (req.session.userID == undefined) {
+        res.redirect("/sign_in")
+    } else {
+        const is_like = db.is_user_liked(req.params.id, req.session.userID)
+        if (is_like) {
+            db.delete_like(req.params.id, req.session.userID)
+            res.redirect("/")
+        } else {
+            db.add_like(req.params.id, req.session.userID)
+            res.redirect("/")
+        }
+    }
+})
+
 
 app.listen('3000', () =>{
     console.log('http://127.0.0.1:3000')

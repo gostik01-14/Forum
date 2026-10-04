@@ -18,7 +18,7 @@
 .error-code {
     font-size: 120px;
     font-weight: bold;
-    color: #6C9BD2;
+    color: var(--accent);
     margin-bottom: 20px;
     line-height: 1;
 }
@@ -29,7 +29,7 @@
 }
 
 .error-message {
-    color: #8B949E;
+    color: var(--muted);
     margin-bottom: 32px;
     font-size: 18px;
 }
@@ -47,3 +47,8 @@
         font-size: 80px;
     }
 }
+/* ===== Редизайн: ошибка ===== */
+.error-code{background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:float 4s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(139,92,246,.5))}
+@keyframes float{50%{transform:translateY(-14px)}}
+.error-container h1{font-weight:700}

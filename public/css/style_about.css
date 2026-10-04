@@ -3,10 +3,10 @@
 }
 
 .about-content {
-    background: #1A1D21;
+    background: var(--surface);
     border-radius: 12px;
     padding: 40px;
-    border: 1px solid #2A2F35;
+    border: 1px solid var(--border);
 }
 
 .about-section {
@@ -14,13 +14,13 @@
 }
 
 .about-section h2 {
-    color: #6C9BD2;
+    color: var(--accent);
     margin-bottom: 15px;
     font-size: 24px;
 }
 
 .about-section p {
-    color: #8B949E;
+    color: var(--muted);
     margin-bottom: 10px;
 }
 
@@ -35,18 +35,18 @@
 .stat-card {
     text-align: center;
     padding: 24px;
-    background: #25292E;
+    background: var(--surface-2);
     border-radius: 12px;
 }
 
 .stat-number {
     font-size: 48px;
     font-weight: bold;
-    color: #6C9BD2;
+    color: var(--accent);
 }
 
 .stat-label {
-    color: #5C6670;
+    color: var(--muted-2);
     margin-top: 8px;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .team-member {
-    background: #25292E;
+    background: var(--surface-2);
     padding: 20px;
     border-radius: 12px;
     text-align: center;
@@ -72,7 +72,7 @@
 }
 
 .team-role {
-    color: #6C9BD2;
+    color: var(--accent);
     font-size: 14px;
 }
 
@@ -82,3 +82,9 @@
         padding: 20px;
     }
 }
+/* ===== Редизайн: о нас ===== */
+.about-section h2{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.stat-card,.team-member{background:var(--surface-2);border:1px solid var(--border);transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+.stat-card:hover,.team-member:hover{transform:translateY(-6px);border-color:rgba(139,92,246,.5);box-shadow:0 14px 34px rgba(139,92,246,.2)}
+.stat-number{background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;color:transparent}
+.team-role{color:var(--cyan)}

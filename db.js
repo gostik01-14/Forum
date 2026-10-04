@@ -74,7 +74,7 @@ function add_like(id, author) {
         author: author,
     }
     const get = db.prepare('SELECT * FROM posts WHERE id = ?').get(id)
-    var arr_likes = JSON.parse(get.answers)
+    var arr_likes = JSON.parse(get.likes)
     arr_likes.push(obj_like)
     const ready_likes = JSON.stringify(arr_likes)
     const insert = db.prepare(`
@@ -89,7 +89,7 @@ function delete_like(id, author) {
         author: author,
     }
     const get = db.prepare('SELECT * FROM posts WHERE id = ?').get(id)
-    var arr_likes = JSON.parse(get.answers)
+    var arr_likes = JSON.parse(get.likes)
     const index = arr_likes.indexOf(obj_like);
     if (index != -1) {
         arr_likes.splice(index, 1);
@@ -109,7 +109,7 @@ function is_user_liked(id, author) {
         author: author,
     }
     const get = db.prepare('SELECT * FROM posts WHERE id = ?').get(id)
-    var arr_likes = JSON.parse(get.answers)
+    var arr_likes = JSON.parse(get.likes)
     const index = arr_likes.indexOf(obj_like);
     if (index != -1) {
         return true

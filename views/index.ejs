@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SoftForum - Главная</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/style_index.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/style_index.css">
 </head>
-<script src="js/base.js"></script>
+<script src="/js/base.js" defer></script>
 <body>
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">SoftForum</a>
+                <a href="/" class="logo"><span class="logo-dot"></span>SoftForum</a>
                 <div class="nav">
                     <a href="/">Главная</a>
                     <a href="/about">О нас</a>
@@ -44,9 +44,46 @@
                             <a href="/answers/<%= post.id %>"><%= post.title %></a>
                         </div>
                         <div class="topic-meta">
-                            <span>👤 <%= post.author %></span>
-                            <form action="/posts/like/<%= post.id %>" method="post">
-                                <button type="submit">👍Лайк</button>
+                            <span><%= post.author %></span>
+                            <form action="/posts/like/<%= post.id %>" method="post" class="like-form">
+                                <button type="submit">
+                                     <svg xmlns="http://w3.org" viewBox="0 0 24 17" width="20" height="20" fill="#fafafc">
+                                        <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
+                                    </svg>
+                                </button>
+                                
+                                <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="24" height="24" class="animated-like">
+                                    <style>
+                                        .animated-like {
+                                            cursor: pointer;
+                                            transition: transform 0.2s ease-in-out;
+                                        }
+                                        .animated-like path {
+                                            stroke: #aa9ed5;
+                                            stroke-width: 0.9;
+                                            stroke-linecap: round;
+                                            stroke-linejoin: round;
+                                            fill: rgba(0, 122, 255, 0); /* Изначально прозрачный центр */
+                                            transition: fill 0.3s ease, stroke 0.3s ease;
+                                        }
+                                        
+                                        /* Эффекты при наведении */
+                                        .animated-like:hover {
+                                            transform: translateY(-4px) scale(1.05) rotate(-5deg); /* Легкий прыжок вверх и увеличение */
+                                        }
+                                        .animated-like:hover path {
+                                            stroke: #007AFF; /* Контур становится темнее */
+                                            fill: #007AFF;   /* Центр плавно закрашивается */
+                                        }
+                                        
+                                        /* Эффект при клике (активное состояние) */
+                                            .animated-like:active {
+                                            transform: translateY(-2px) scale(0.95); /* Сжатие при нажатии */
+                                        }
+                                    </style>
+                                    
+                                    <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
+                                    </svg>
                             </form>
                         </div>
                         <div class="topic-excerpt">

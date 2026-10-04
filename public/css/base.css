@@ -1,267 +1,109 @@
-/* ---------- Сброс и базовая типографика ---------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ============ SoftForum — дизайн-система ============ */
+:root{
+  --bg:#0B0D14; --surface:rgba(22,25,38,.72); --surface-2:rgba(255,255,255,.05);
+  --border:rgba(255,255,255,.09); --text:#EEF0F8; --muted:#9AA3B8; --muted-2:#6B7490;
+  --accent:#8B5CF6; --accent-2:#A78BFA; --cyan:#22D3EE; --pink:#F472B6;
+  --grad:linear-gradient(135deg,#8B5CF6 0%,#22D3EE 100%);
+  --grad-warm:linear-gradient(135deg,#F472B6 0%,#8B5CF6 100%);
+  --radius:16px; --ease:cubic-bezier(.4,0,.2,1);
 }
+*{margin:0;padding:0;box-sizing:border-box}
+html{height:100%;scroll-behavior:smooth}
+body{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6}
 
-html {
-    height: 100%;
-}
+/* ---- Анимированный фон: плавающие градиентные пятна + сетка ---- */
+body::before{content:'';position:fixed;inset:-20%;z-index:-2;pointer-events:none;
+  background:
+   radial-gradient(600px circle at 15% 20%,rgba(139,92,246,.35),transparent 60%),
+   radial-gradient(500px circle at 85% 15%,rgba(34,211,238,.25),transparent 60%),
+   radial-gradient(550px circle at 70% 85%,rgba(244,114,182,.22),transparent 60%);
+  animation:drift 22s ease-in-out infinite alternate;filter:blur(20px)}
+body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%)}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(4%,6%) scale(1.1)}100%{transform:translate(-5%,3%) scale(1.05)}}
 
-/* ---------- body: flex-колонка, чтобы футер всегда был внизу ---------- */
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-    background: #121417;
-    color: #EAECEF;
-    line-height: 1.6;
-}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
 
-/* ---------- Контейнер ---------- */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+/* ---- Шапка (стекло) ---- */
+.header{position:sticky;top:0;z-index:100;background:rgba(11,13,20,.55);
+  backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);
+  border-bottom:1px solid var(--border);transition:background .3s,box-shadow .3s}
+.header.scrolled{background:rgba(11,13,20,.85);box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.header-content{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:800;letter-spacing:-.5px;text-decoration:none;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;transition:filter .3s}
+.logo:hover{filter:drop-shadow(0 0 12px rgba(139,92,246,.7))}
+.logo-dot{width:12px;height:12px;border-radius:50%;background:var(--grad);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(139,92,246,.6)}70%{box-shadow:0 0 0 12px rgba(139,92,246,0)}100%{box-shadow:0 0 0 0 rgba(139,92,246,0)}}
+.nav{display:flex;gap:24px;align-items:center}
+.nav a:not(.btn):not(.btn-logout){position:relative;color:var(--muted);text-decoration:none;font-weight:500;transition:color .3s}
+.nav a:not(.btn):not(.btn-logout)::after{content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--grad);border-radius:2px;transition:width .3s var(--ease)}
+.nav a:not(.btn):not(.btn-logout):hover{color:var(--text)}
+.nav a:not(.btn):not(.btn-logout):hover::after{width:100%}
 
-/* ---------- Шапка ---------- */
-.header {
-    background: #1A1D21;
-    border-bottom: 1px solid #2A2F35;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+/* ---- Кнопки ---- */
+.btn{position:relative;overflow:hidden;display:inline-block;padding:10px 20px;border-radius:10px;border:none;cursor:pointer;
+  font:inherit;font-size:14px;font-weight:600;text-decoration:none;transition:transform .25s var(--ease),box-shadow .25s,background .25s}
+.btn:active{transform:scale(.96)}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 4px 18px rgba(139,92,246,.4)}
+.btn-primary::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(34,211,238,.35)}
+.btn-primary:hover::after{left:140%}
+.btn-secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent-2)}
+.btn-outline:hover{background:rgba(139,92,246,.12)}
 
-.header.scrolled {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
+.main{flex:1 0 auto;padding:40px 0}
+.page-title{font-size:36px;font-weight:800;letter-spacing:-.5px;margin-bottom:30px;
+  background:linear-gradient(90deg,#fff,var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;animation:fadeUp .6s var(--ease) both}
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 0;
-}
+/* ---- Формы ---- */
+.form-group{margin-bottom:24px}
+.form-group label{display:block;margin-bottom:8px;font-weight:500}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:13px 14px;background:rgba(255,255,255,.04);
+  border:1px solid var(--border);border-radius:10px;color:var(--text);font:inherit;font-size:16px;transition:all .3s}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted-2)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent);
+  background:rgba(139,92,246,.06);box-shadow:0 0 0 4px rgba(139,92,246,.15),0 0 20px rgba(139,92,246,.15)}
+.form-group textarea{resize:vertical}
+.checkbox-group{display:flex;align-items:center;gap:8px;margin-bottom:24px;color:var(--muted)}
+.checkbox-group input{width:auto;accent-color:var(--accent);cursor:pointer}
+.error-message{background:rgba(244,63,94,.1);border-left:4px solid #F43F5E;padding:12px;border-radius:8px;margin-bottom:20px;color:#FDA4AF;font-size:14px}
+.success-message{background:rgba(34,197,94,.1);border-left:4px solid #22C55E;padding:12px;border-radius:8px;margin-bottom:20px;color:#86EFAC;font-size:14px}
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #6C9BD2;
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-    text-shadow: 0 0 0 rgba(108, 155, 210, 0);
-}
+/* ---- Стеклянные карточки ---- */
+.auth-container,.form-container,.about-content,.topic-header,.answer-form,.post,.topic-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.auth-container{max-width:500px;margin:0 auto;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.4);animation:fadeUp .6s var(--ease) both}
+.auth-title{text-align:center;margin-bottom:32px;font-size:28px;font-weight:800}
+.auth-footer{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);color:var(--muted)}
+.auth-footer a{color:var(--cyan);text-decoration:none}.auth-footer a:hover{text-decoration:underline}
 
-.logo:hover {
-    color: #7EABDA;
-    text-shadow: 0 0 12px rgba(108, 155, 210, 0.6);
-}
+/* ---- Подвал ---- */
+.footer{flex-shrink:0;background:rgba(11,13,20,.6);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:30px 0;margin-top:60px}
+.footer-content{text-align:center;color:var(--muted-2)}
 
-/* ---------- Навигация ---------- */
-.nav {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-}
+/* ---- Появление ---- */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
 
-.nav a {
-    color: #EAECEF;
-    text-decoration: none;
-    transition: color 0.3s;
-}
+/* ---- Подсветка карточек за курсором ---- */
+.glow{position:relative}
+.glow::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.18),transparent 70%)}
+.glow:hover::before{opacity:1}
 
-.nav a:hover {
-    color: #6C9BD2;
-}
+::selection{background:var(--accent);color:#fff}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--accent),var(--cyan));border-radius:10px}
 
-/* ---------- Кнопки ---------- */
-.btn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.btn:active {
-    transform: scale(0.96);
-}
-
-.btn-primary {
-    background: #6C9BD2;
-    color: #121417;
-}
-
-.btn-primary:hover {
-    background: #7EABDA;
-    transform: translateY(-1px);
-}
-
-.btn-secondary {
-    background: #25292E;
-    color: #EAECEF;
-    border: 1px solid #2A2F35;
-}
-
-.btn-secondary:hover {
-    background: #2A2F35;
-}
-
-.btn-outline {
-    background: transparent;
-    border: 1px solid #6C9BD2;
-    color: #6C9BD2;
-}
-
-.btn-outline:hover {
-    background: rgba(108, 155, 210, 0.1);
-}
-
-/* ---------- Основной контент: растягивается, прижимая футер вниз ---------- */
-.main {
-    flex: 1 0 auto;
-    padding: 40px 0;
-}
-
-.page-title {
-    font-size: 32px;
-    margin-bottom: 30px;
-    color: #EAECEF;
-}
-
-/* ---------- Формы ---------- */
-.form-group {
-    margin-bottom: 24px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #EAECEF;
-    font-weight: 500;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    background: #25292E;
-    border: 1px solid #2A2F35;
-    border-radius: 6px;
-    color: #EAECEF;
-    font-size: 16px;
-    transition: all 0.3s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #6C9BD2;
-    box-shadow: 0 0 0 3px rgba(108, 155, 210, 0.1);
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 24px;
-}
-
-.checkbox-group input {
-    width: auto;
-    cursor: pointer;
-}
-
-/* ---------- Сообщения об ошибках / успехе ---------- */
-.error-message {
-    background: #2A1F1F;
-    border-left: 4px solid #B5756B;
-    padding: 12px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    color: #B5756B;
-    font-size: 14px;
-}
-
-.success-message {
-    background: #1E2A1E;
-    border-left: 4px solid #5A8C5A;
-    padding: 12px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    color: #5A8C5A;
-    font-size: 14px;
-}
-
-/* ---------- Карточка авторизации ---------- */
-.auth-container {
-    max-width: 500px;
-    margin: 0 auto;
-    background: #1A1D21;
-    border-radius: 12px;
-    padding: 40px;
-    border: 1px solid #2A2F35;
-}
-
-.auth-title {
-    text-align: center;
-    margin-bottom: 32px;
-    font-size: 28px;
-}
-
-.auth-footer {
-    text-align: center;
-    margin-top: 24px;
-    padding-top: 24px;
-    border-top: 1px solid #2A2F35;
-    color: #8B949E;
-}
-
-.auth-footer a {
-    color: #6C9BD2;
-    text-decoration: none;
-}
-
-.auth-footer a:hover {
-    text-decoration: underline;
-}
-
-/* ---------- Подвал: прижат к низу, не сжимается ---------- */
-.footer {
-    flex-shrink: 0;
-    background: #1A1D21;
-    border-top: 1px solid #2A2F35;
-    padding: 30px 0;
-    margin-top: 60px;
-}
-
-.footer-content {
-    text-align: center;
-    color: #5C6670;
-}
-
-/* ---------- Адаптивность (базовая) ---------- */
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .auth-container {
-        padding: 24px;
-    }
-}
+@media (max-width:768px){.header-content{flex-direction:column;gap:14px}.nav{flex-wrap:wrap;justify-content:center;gap:14px}.auth-container{padding:24px}.page-title{font-size:28px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}

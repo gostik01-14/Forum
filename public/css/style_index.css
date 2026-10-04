@@ -1,10 +1,10 @@
 /* ---------- Секция быстрого действия ---------- */
 .quick-actions {
-    background: linear-gradient(135deg, #1A1D21 0%, #1E2836 100%);
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(139,92,246,.1) 100%);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 40px;
-    border: 1px solid #2A2F35;
+    border: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,8 +18,8 @@
 }
 
 .topic-card {
-    background: #1A1D21;
-    border: 1px solid #2A2F35;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 20px;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -27,9 +27,9 @@
 }
 
 .topic-card:hover {
-    border-color: #6C9BD2;
+    border-color: var(--accent);
     transform: translateX(4px);
-    box-shadow: 0 8px 24px rgba(108, 155, 210, 0.15);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
 }
 
 .topic-card:nth-child(1) { animation-delay: 0.05s; }
@@ -44,25 +44,25 @@
 }
 
 .topic-title a {
-    color: #EAECEF;
+    color: var(--text);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .topic-title a:hover {
-    color: #6C9BD2;
+    color: var(--accent);
 }
 
 .topic-meta {
     display: flex;
     gap: 20px;
-    color: #8B949E;
+    color: var(--muted);
     font-size: 14px;
     margin-bottom: 12px;
 }
 
 .topic-excerpt {
-    color: #8B949E;
+    color: var(--muted);
     margin-bottom: 12px;
 }
 
@@ -73,17 +73,17 @@
 }
 
 .tag {
-    background: #25292E;
+    background: var(--surface-2);
     padding: 4px 12px;
     border-radius: 6px;
     font-size: 12px;
-    color: #8B949E;
+    color: var(--muted);
     transition: all 0.2s;
 }
 
 .tag:hover {
-    background: #6C9BD2;
-    color: #121417;
+    background: var(--accent);
+    color: #0B0D14;
     transform: translateY(-2px);
 }
 
@@ -97,19 +97,19 @@
 
 .page-link {
     padding: 8px 12px;
-    background: #1A1D21;
-    border: 1px solid #2A2F35;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 6px;
-    color: #EAECEF;
+    color: var(--text);
     text-decoration: none;
     transition: all 0.3s;
 }
 
 .page-link:hover,
 .page-link.active {
-    background: #6C9BD2;
-    color: #121417;
-    border-color: #6C9BD2;
+    background: var(--accent);
+    color: #0B0D14;
+    border-color: var(--accent);
 }
 
 /* ---------- Кнопка выхода ---------- */
@@ -146,7 +146,7 @@
 
 .btn-logout:hover {
     background: #C98B80;
-    color: #121417;
+    color: #0B0D14;
     border-color: #C98B80;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(201, 139, 128, 0.3);
@@ -168,7 +168,7 @@
     gap: 6px;
     padding: 8px 20px;
     background: linear-gradient(135deg, #B5756B 0%, #9E5E54 100%);
-    color: #EAECEF;
+    color: var(--text);
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
@@ -227,3 +227,26 @@
         flex-wrap: wrap;
     }
 }
+/* ===== Редизайн: главная ===== */
+.quick-actions{background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(34,211,238,.12));backdrop-filter:blur(14px);
+  position:relative;overflow:hidden;animation:fadeUp .6s var(--ease) both}
+.quick-actions::after{content:'';position:absolute;width:260px;height:260px;right:-60px;top:-100px;border-radius:50%;
+  background:radial-gradient(circle,rgba(244,114,182,.4),transparent 70%);animation:floaty 7s ease-in-out infinite}
+.quick-actions h2{font-size:26px;font-weight:800}
+.quick-actions > *{position:relative;z-index:1}
+@keyframes floaty{50%{transform:translate(-30px,30px) scale(1.15)}}
+.topic-card{overflow:hidden}
+.topic-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);transform:scaleY(0);transform-origin:top;transition:transform .35s var(--ease)}
+.topic-card:hover::after{transform:scaleY(1)}
+.topic-card:hover{border-color:rgba(139,92,246,.5);box-shadow:0 12px 36px rgba(139,92,246,.2)}
+.topic-title a:hover{color:var(--cyan)}
+.topic-meta{align-items:center}
+.topic-meta button{background:var(--surface-2);border:1px solid var(--border);color:var(--text);padding:4px 12px;border-radius:999px;
+  font:inherit;font-size:13px;cursor:pointer;transition:all .25s}
+.topic-meta button:hover{background:rgba(244,114,182,.15);border-color:var(--pink);transform:scale(1.08)}
+.topic-meta button:active{transform:scale(.9)}
+.tag{border:1px solid var(--border);color:var(--accent-2);background:rgba(139,92,246,.1)}
+.tag:hover{background:var(--grad);color:#fff;border-color:transparent}
+.topic-card:nth-child(n+6){animation-delay:.3s}
+.btn-delete{margin-top:12px;padding:6px 14px;font-size:13px;opacity:.85}
+.btn-delete:hover{opacity:1}

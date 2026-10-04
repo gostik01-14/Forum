@@ -5,7 +5,7 @@
 .back-link {
     display: inline-block;
     margin-bottom: 20px;
-    color: #6C9BD2;
+    color: var(--accent);
     text-decoration: none;
 }
 
@@ -15,11 +15,11 @@
 
 /* ---------- Шапка темы ---------- */
 .topic-header {
-    background: #1A1D21;
+    background: var(--surface);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 24px;
-    border: 1px solid #2A2F35;
+    border: 1px solid var(--border);
 }
 
 .topic-title {
@@ -30,22 +30,22 @@
 .topic-meta {
     display: flex;
     gap: 20px;
-    color: #8B949E;
+    color: var(--muted);
     font-size: 14px;
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
 .topic-content {
-    color: #EAECEF;
+    color: var(--text);
     margin-bottom: 20px;
     line-height: 1.8;
 }
 
 /* ---------- Посты / ответы ---------- */
 .post {
-    background: #1A1D21;
-    border: 1px solid #2A2F35;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 16px;
@@ -53,7 +53,7 @@
 }
 
 .post:hover {
-    border-color: #6C9BD2;
+    border-color: var(--accent);
 }
 
 .post-header {
@@ -67,16 +67,16 @@
 
 .post-author {
     font-weight: bold;
-    color: #6C9BD2;
+    color: var(--accent);
 }
 
 .post-date {
-    color: #5C6670;
+    color: var(--muted-2);
     font-size: 12px;
 }
 
 .post-content {
-    color: #8B949E;
+    color: var(--muted);
     margin-bottom: 16px;
     line-height: 1.6;
 }
@@ -87,23 +87,23 @@
 }
 
 .post-action {
-    color: #5C6670;
+    color: var(--muted-2);
     font-size: 14px;
     cursor: pointer;
     transition: color 0.3s;
 }
 
 .post-action:hover {
-    color: #6C9BD2;
+    color: var(--accent);
 }
 
 /* ---------- Форма ответа ---------- */
 .answer-form {
-    background: #1A1D21;
+    background: var(--surface);
     border-radius: 12px;
     padding: 24px;
     margin-top: 32px;
-    border: 1px solid #2A2F35;
+    border: 1px solid var(--border);
 }
 
 .form-group textarea {
@@ -117,3 +117,11 @@
         align-items: flex-start;
     }
 }
+/* ===== Редизайн: ответы ===== */
+.back-link{color:var(--cyan);transition:transform .3s}.back-link:hover{transform:translateX(-4px);text-decoration:none}
+.topic-title{font-weight:800;letter-spacing:-.3px}
+.post{transition:all .3s var(--ease)}
+.post:hover{border-color:rgba(139,92,246,.5);transform:translateX(4px);box-shadow:0 10px 30px rgba(139,92,246,.15)}
+.post-author{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.post-content{color:var(--text);opacity:.85}
+.answer-form{border-top:2px solid var(--accent)}
